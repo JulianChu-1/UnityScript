@@ -14,6 +14,7 @@ public class BroSignal : MonoBehaviour
     void Start()
     {
         num = transform.parent.childCount;
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
