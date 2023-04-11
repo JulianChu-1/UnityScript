@@ -12,7 +12,6 @@ public class MyRotation : MonoBehaviour
 
     void Update()
     {
-
         float t = Mathf.Clamp01(timeElapsed / duration);
         float zRotation = Mathf.Lerp(startAngle, endAngle, t);
         Quaternion newRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, zRotation);
