@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 public class PlayerController : MonoBehaviour
 {
     public SteamVR_Action_Vector2 input;
-    public float speed = 1f;
+    public float speed = 0.8f;
     private CharacterController characterController;
 
     // Start is called before the first frame update

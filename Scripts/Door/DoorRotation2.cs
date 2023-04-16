@@ -19,7 +19,7 @@ public class DoorRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentAngle < targetAngle)
+        if (signal && currentAngle < targetAngle)
         {
             float rotation = speed * Time.deltaTime;
             transform.RotateAround(point.position, Vector3.up, rotation);

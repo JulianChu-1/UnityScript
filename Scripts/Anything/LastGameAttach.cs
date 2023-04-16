@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LastGameAttach : MonoBehaviour
 {
-    public int m = 1;
+    public int label = 1;
     // Start is called before the first frame update
     void Start()
     {

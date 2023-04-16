@@ -24,14 +24,7 @@ public class PlayerCenter : MonoBehaviour
 
     void Update()
     {
-
-        Transform cameraTransform = Camera.main.transform;
-        // 计算UI界面的位置，使其始终在相机前方固定距离的位置
-        Vector3 uiPosition = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-        // 将CanvasHolder GameObject的位置设置为UI界面的位置
-        transform.position = uiPosition;
-        // 将CanvasHolder GameObject的旋转设置为主相机的旋转
-        transform.rotation = cameraTransform.rotation;
+        
     }
 
     public void Animation_Start()
@@ -55,13 +48,10 @@ public class PlayerCenter : MonoBehaviour
         // 播放动画
         while (Time.time < startTime + animDuration)
         {
-            // 计算当前时间的动画进度（0-1之间）
+            
             float t = (Time.time - startTime) / animDuration;
-
-            // 计算UI界面的当前缩放比例
             float scale = Mathf.Lerp(0, finalScale, t);
 
-            // 更新UI界面的缩放比例
             transform.localScale = initialScale * scale;
 
             yield return null;
