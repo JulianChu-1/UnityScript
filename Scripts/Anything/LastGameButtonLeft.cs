@@ -8,33 +8,50 @@ public class LastGameButtonLeft : MonoBehaviour
     private GameObject img;
     private GameObject timg;
     private int index = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int check;
 
     public void OnClick()
     {
-        temp = transform.parent.parent.GetChild(2);
-        index = index % 7;
+        Debug.Log(index);
+        temp = transform.parent.parent.GetChild(1).GetChild(2);
+        index = index % 6;
         if(index == 0)
-            index++;
-        img = temp.GetChild(index).gameObject;
+            index = 5;
+        check = 0;
 
-        for(int i = 1; i < 7; i++)
+        while(true)
         {
-            timg = temp.GetChild(index).gameObject;
-            timg.SetActive(false);
+            if(check >= 6)
+            {
+                break;
+            }
+
+            if (temp.GetChild(index).gameObject.GetComponent<LastGameAttach>().signal)
+            {
+                img = temp.GetChild(index).gameObject;
+                break;
+            }       
+            else
+            {
+                index--;
+                index = index % 6;
+                if(index == 0)
+                    index = 5;
+                check++;
+            }     
+        }
+
+        
+        for(int i = 0; i < 6; i++)
+        {
+            timg = temp.GetChild(i).gameObject;
+            if (timg.GetComponent<LastGameAttach>().signal)
+            {
+                timg.SetActive(false);
+            }
         }
 
         img.SetActive(true);
-        index++;
+        index--;
     }
 }

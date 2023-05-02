@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FourButtonQie : MonoBehaviour
 {
-    private float distance = 0.075f;
+    private float distance = 0.3f;
     private float now_distance = 0.0f;
     private bool signal = false;
     //private float speed = 5.0f;

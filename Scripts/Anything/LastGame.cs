@@ -4,68 +4,59 @@ using UnityEngine;
 
 public class LastGame : MonoBehaviour
 {
-    public int name = 1;
+    public string m_name = null;
     private Transform temp;
     private GameObject check;
-    private GameObject MyCanvas;
+    private GameObject FatherCanvas;
+    private GameObject WinCanvas;
+    private GameObject WrongCanvas;
+    private GameObject leftbutton;
     private int i;//用于for循环
-    private int label;
+    private string label;
+    private int num = 0;//记录成功的数量
 
     private void Start() 
     {
-        Debug.Log("123");
-        
+        FatherCanvas = transform.parent.parent.gameObject;
+        WinCanvas = FatherCanvas.transform.parent.GetChild(9).gameObject;
+        WrongCanvas = FatherCanvas.transform.parent.GetChild(11).gameObject;
     }
+
     public void OnClick()
     {
-        Debug.Log(111);
-        temp = transform.parent.parent.GetChild(2);
+        //Debug.Log(111);
+        temp = transform.parent.parent.GetChild(1).GetChild(2);
 
-        for(i = 1; i < 7; i++)
+        for(i = 0; i < 6; i++)
         {
             check = temp.GetChild(i).gameObject;
-            if(check.activeSelf == true)
+            if (check.activeSelf == true && check.GetComponent<LastGameAttach>().signal)
             {
                 label = check.GetComponent<LastGameAttach>().label;//得到图片的标签
                 break;
-            }
-                
-            else
-                continue;
+            }  
         }
 
-        if(name == label)
+        if(m_name == label)
         {
             check.transform.localScale = new Vector3(0.1f,0.2f,0.2f);
             check.transform.position = transform.position;
+            check.GetComponent<LastGameAttach>().changeSignal();//修改图片的性质
+            leftbutton = transform.parent.GetChild(0).gameObject;
+            leftbutton.GetComponent<LastGameButtonLeft>().OnClick();
+            num++;
+            Debug.Log("num = " + num);
+            
+            if (num == 6)
+            {
+                FatherCanvas.SetActive(false);
+                WinCanvas.SetActive(true);
+            }
         }
+
         else
         {
-            
+            Debug.Log("Wrong!!!");
         }
-
-        // for(i = 0; i < 6; i++)
-        // {
-        //     check = temp.transform.GetChild(i).gameObject;
-
-        //     int j = check.GetComponent<LastGameAttach>().m;
-
-        //     if(check.activeSelf == true && name == j)
-        //     {
-        //         transform.position = check.transform.position;
-        //         check.SetActive(false);
-        //         break;
-        //     }
-        //     else if(name != j && check.activeSelf == true)
-        //     {
-        //         MyCanvas = transform.parent.parent.GetChild(3).GetChild(0).gameObject;
-        //         MyCanvas.SetActive(true);
-        //         break;
-        //     }
-        //     else
-        //     {
-        //         continue;
-        //     }
-        // }
     }
 }

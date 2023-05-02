@@ -22,19 +22,36 @@ public class LastGameButtonRight : MonoBehaviour
 
     public void OnClick()
     {
-        temp = transform.parent.parent.GetChild(2);
-        index = index % 7;
+        temp = transform.parent.parent.GetChild(1).GetChild(2);
+        index = index % 6;
         if(index == 0)
-            index = 6;
-        img = temp.GetChild(index).gameObject;
-
-        for(int i = 1; i < 7; i++)
+            index++;
+        while(true)
         {
-            timg = temp.GetChild(index).gameObject;
-            timg.SetActive(false);
+            if (temp.GetChild(index).gameObject.GetComponent<LastGameAttach>().signal)
+            {
+                img = temp.GetChild(index).gameObject;
+                break;
+            }       
+            else
+            {
+                index++;
+                index = index % 6;
+                if(index == 0)
+                    index++;
+            }     
+        }
+
+        for(int i = 0; i < 6; i++)
+        {
+            timg = temp.GetChild(i).gameObject;
+            if (timg.GetComponent<LastGameAttach>().signal)
+            {
+                timg.SetActive(false);
+            }
         }
 
         img.SetActive(true);
-        index--;
+        index++;
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class DrawerMovement : MonoBehaviour
 {
     private bool signal = false;
-    private float distance = 0.8f;
+    private float distance = 3.2f;
     private float now_distance = 0.0f;
-    private float speed = 0.1f;
+    private float speed = 0.06f;
 
     // Update is called once per frame
     void Update()
