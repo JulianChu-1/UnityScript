@@ -5,10 +5,12 @@ using UnityEngine;
 public class DoorRotation2 : MonoBehaviour
 {
     public Transform point;
+    public AudioSource audioSource;
     private float speed = 50f;
     private float targetAngle = 90f;
     private float currentAngle = 0f;
     private bool signal = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class DoorRotation2 : MonoBehaviour
 
     public void Click()
     {
+        audioSource.Play();
         signal = true;
     }
 }

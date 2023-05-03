@@ -6,26 +6,46 @@ public class LastGame : MonoBehaviour
 {
     public string m_name = null;
     private Transform temp;
+    private Transform WrongCanvas;
+    private GameObject WrongIMG;
     private GameObject check;
     private GameObject FatherCanvas;
-    private GameObject WinCanvas;
-    private GameObject WrongCanvas;
     private GameObject leftbutton;
     private int i;//用于for循环
     private string label;
-    private int num = 0;//记录成功的数量
 
     private void Start() 
     {
         FatherCanvas = transform.parent.parent.gameObject;
-        WinCanvas = FatherCanvas.transform.parent.GetChild(9).gameObject;
-        WrongCanvas = FatherCanvas.transform.parent.GetChild(11).gameObject;
+        //WinCanvas = FatherCanvas.transform.parent.GetChild(9).gameObject;
+        WrongCanvas = FatherCanvas.transform.parent.GetChild(11);
+    }
+
+    private void findIMG(string myname)
+    {
+        for(i = 0; i < 6; i++)
+        {
+            WrongIMG = WrongCanvas.GetChild(0).GetChild(i).gameObject;
+            WrongIMG.SetActive(false);
+        }
+
+        for(i = 0; i < 6; i++)
+        {
+            WrongIMG = WrongCanvas.GetChild(0).GetChild(i).gameObject;
+            if (WrongIMG.GetComponent<LastGameAttach>().label == myname)
+            {
+                break;
+            }
+        }
+
+        WrongIMG.SetActive(true);
     }
 
     public void OnClick()
     {
         //Debug.Log(111);
         temp = transform.parent.parent.GetChild(1).GetChild(2);
+        WrongCanvas.gameObject.SetActive(true);
 
         for(i = 0; i < 6; i++)
         {
@@ -42,21 +62,15 @@ public class LastGame : MonoBehaviour
             check.transform.localScale = new Vector3(0.1f,0.2f,0.2f);
             check.transform.position = transform.position;
             check.GetComponent<LastGameAttach>().changeSignal();//修改图片的性质
+            findIMG(m_name);
             leftbutton = transform.parent.GetChild(0).gameObject;
             leftbutton.GetComponent<LastGameButtonLeft>().OnClick();
-            num++;
-            Debug.Log("num = " + num);
-            
-            if (num == 6)
-            {
-                FatherCanvas.SetActive(false);
-                WinCanvas.SetActive(true);
-            }
+            FatherCanvas.GetComponent<LastGameEnd>().numPlus();//计算当前成功数量
         }
 
         else
         {
-            Debug.Log("Wrong!!!");
+            findIMG(m_name);
         }
     }
 }

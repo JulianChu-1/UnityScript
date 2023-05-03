@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-public class SimpleAttach : MonoBehaviour
+public class SimpleAttach2 : MonoBehaviour
 {
     private Interactable interactable;
     public AudioSource audioSource = null;
@@ -41,8 +41,9 @@ public class SimpleAttach : MonoBehaviour
             hand.HoverUnlock(interactable);
             if (audioSource != null)
             {
-                audioSource.Play();
+                audioSource.Pause();
             }
         }
     }
 }
+
